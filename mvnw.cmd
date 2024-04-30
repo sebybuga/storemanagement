@@ -180,7 +180,7 @@ set MAVEN_CMD_LINE_ARGS=%*
   %MAVEN_OPTS% ^
   %MAVEN_DEBUG_OPTS% ^
   -classpath %WRAPPER_JAR% ^
-  "-Dmaven.multiModuleStoreManagementDirectory=%MAVEN_PROJECTBASEDIR%" ^
+  "-Dmaven.multiModuleOrderDirectory=%MAVEN_PROJECTBASEDIR%" ^
   %WRAPPER_LAUNCHER% %MAVEN_CONFIG% %*
 if ERRORLEVEL 1 goto error
 goto end
