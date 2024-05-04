@@ -1,20 +1,29 @@
 package com.storemanagement.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.storemanagement.dto.OrderDTO;
-import com.storemanagement.dto.OrderPatchQuantityDTO;
+import com.storemanagement.dto.OrderPatchStatusDTO;
+import com.storemanagement.dto.OrderProductDTO;
+import com.storemanagement.dto.OrderRequestDTO;
 import com.storemanagement.entity.OrderEntity;
+import com.storemanagement.entity.OrderProductEntity;
 import com.storemanagement.repo.OrderRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class OrderService {
 	//@Value("${usermanagement.user.getAllByIds}")
 	//private String usermanagementGetAllByIdsUrl;
 	private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+	//private final ObjectMapper mapper = new ObjectMapper();
 	private OrderRepository orderRepository;
 	//private UserService userService;
 
@@ -23,32 +32,53 @@ public class OrderService {
 
 	}
 
-	public OrderDTO createOrder(OrderDTO orderDTO) {
-
+	public OrderDTO createOrder(OrderRequestDTO orderDTO) {
+		log.info("orderEntity to be created is :{}",orderDTO);
 		OrderEntity orderEntity = mapper.map(orderDTO, OrderEntity.class);
-		// System.out.println("projectEntity este:" + projectEntity.getName() + " " +
+
 		OrderEntity savedOrder = orderRepository.save(orderEntity);
 
 		OrderDTO savedOrderDTO = mapper.map(savedOrder, OrderDTO.class);
 
-		//savedOrderDTO.setUserList(fetchUserList(savedOrderDTO.getUserList()));
-
 		return savedOrderDTO;
 
 	}
+
+
 
 	public OrderDTO getOrder(Long id) {
 
 		OrderDTO orderDTO=null;
 
 		Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+
 		if (orderEntity.isPresent()) {
-			orderDTO = mapper.map(orderEntity, OrderDTO.class);
+			//log.debug("orderEntity is :{}",orderEntity.toString());
+
+			orderDTO = mapper.map(orderEntity.get(), OrderDTO.class);
+
+			setProductsQuantities(orderEntity.get(),orderDTO);
 		}
 
-		//projectDto.setUserList(fetchUserList(projectDto.getUserList()));
+
+
 
 		return orderDTO;
+
+	}
+
+	private void setProductsQuantities(OrderEntity orderEntity, OrderDTO orderDTO) {
+		 List<OrderProductEntity> orderProductEntityList =  orderEntity.getQuantities();
+		List<OrderProductDTO> orderProductDTOList = new ArrayList<>();
+		for (OrderProductEntity orderProductEntity :  orderProductEntityList){
+			OrderProductDTO orderProductDTO = new OrderProductDTO(
+					orderProductEntity.getProduct().getId(),
+					orderProductEntity.getQuantity());
+			orderProductDTOList.add(orderProductDTO);
+
+
+		}
+		orderDTO.setQuantities(orderProductDTOList);
 
 	}
 
@@ -67,18 +97,13 @@ public class OrderService {
 
 	}
 
-	public OrderDTO patchOrder(OrderPatchQuantityDTO orderPatchQuantityDTO) {
+	public OrderDTO patchOrder(OrderPatchStatusDTO orderPatchStatusDTO) {
 		OrderEntity orderToSave=null;
-		Optional<OrderEntity> orderEntity = orderRepository.findById(orderPatchQuantityDTO.getId());
-		// if (projectEntity!=null) {
+		Optional<OrderEntity> orderEntity = orderRepository.findById(orderPatchStatusDTO.getId());
 
-		// projectEntity.setName(projectPatchNameDto.getName());
-		// }
-
-		if (orderEntity.isPresent() && orderPatchQuantityDTO.getQuantity()!=null){
-
+		if (orderEntity.isPresent() && orderPatchStatusDTO.getOrderStatusId()!=null){
 			orderToSave=orderEntity.get();
-			orderToSave.setQuantity( orderPatchQuantityDTO.getQuantity());
+			orderToSave.setOrderStatusId( orderPatchStatusDTO.getOrderStatusId());
 		}
 		OrderEntity patchOrder = orderRepository.save(orderToSave);
 

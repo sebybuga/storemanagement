@@ -3,10 +3,13 @@ package com.storemanagement.controller;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.storemanagement.dto.OrderDTO;
+import com.storemanagement.dto.OrderPatchStatusDTO;
+import com.storemanagement.dto.OrderRequestDTO;
 import com.storemanagement.repo.OrderRepository;
 import com.storemanagement.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +27,7 @@ public class OrderController {
 	}
 
 	@PostMapping
-	public OrderDTO createOrder(@RequestBody OrderDTO orderDto) {
+	public OrderDTO createOrder(@RequestBody @Valid OrderRequestDTO orderDto) {
 		return orderService.createOrder(orderDto);
 	}
 	
@@ -33,11 +36,11 @@ public class OrderController {
 		return orderService.updateOrder(orderDto);
 	}
 
-	/*@PatchMapping
-	public void patchOrderName(@RequestBody OrderPatchNameDto orderPatchNameDto) {
-		orderService.patchOrder(orderPatchNameDto);
+	@PatchMapping
+	public void patchOrderStatus(@RequestBody OrderPatchStatusDTO orderPatchStatusDTO) {
+		orderService.patchOrder(orderPatchStatusDTO);
 
-	}*/
+	}
 
 	@GetMapping("/{id}")
 	public OrderDTO getOrder(@PathVariable Long id) {
@@ -55,7 +58,7 @@ public class OrderController {
 				.stream()				
                 .map(orderEntity -> mapper.map(orderEntity, OrderDTO.class))
                 .collect(Collectors.toList());
-		//return userRepository.findAll
+
 		
 	}
 	

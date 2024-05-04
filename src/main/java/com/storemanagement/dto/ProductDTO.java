@@ -2,9 +2,10 @@ package com.storemanagement.dto;
 
 import java.util.List;
 
-import com.storemanagement.entity.OrderEntity;
-import com.storemanagement.entity.PriceEntity;
+import com.storemanagement.constant.CurrencyEnum;
 import lombok.*;
+
+import javax.persistence.*;
 
 
 @Data
@@ -20,9 +21,10 @@ public class ProductDTO {
 
 	private String description;
 
-	private List<PriceEntity> prices;
+	@Enumerated(EnumType.ORDINAL)
+	private CurrencyEnum currencyId;
 
-	private List<OrderEntity> orders;
+	private Double price;
 
 	
 }
