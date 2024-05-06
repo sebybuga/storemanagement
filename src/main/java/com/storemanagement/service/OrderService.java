@@ -24,7 +24,6 @@ import java.util.Optional;
 @Slf4j
 public class OrderService {
 
-    private static final Long VERSION_CHANGED = 1L;
     private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
     private OrderRepository orderRepository;
@@ -132,23 +131,24 @@ public class OrderService {
     }
 
     private void buildOrderProductEntity(OrderEntity orderEntity, OrderProductEntity orderProductEntity, Long productId, Double quantity) {
+        Optional<ProductEntity> productEntity;
         if (orderEntity != null) {
             orderEntity.setOrderProductList(null);
             orderEntity.setOrderStatusId(OrderStatusEnum.INITIATED);
             orderProductEntity.setOrder(orderEntity);
         }
         if (productId != null) {
-            Optional<ProductEntity> productEntity = productRepository.findById(productId);
+            productEntity = productRepository.findById(productId);
             if (productEntity.isPresent()) {
                 orderProductEntity.setProduct(productEntity.get());
+                orderProductEntity.setPrice(productEntity.get().getPrice());
+                orderProductEntity.setCurrencyId(productEntity.get().getCurrencyId());
             }
         }
         if (quantity != null) {
             orderProductEntity.setQuantity(quantity);
         }
-        if (orderEntity.getId()!=null){
-            orderProductEntity.setVersion(VERSION_CHANGED);
-        }
+
 
     }
 
