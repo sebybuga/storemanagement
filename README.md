@@ -9,4 +9,6 @@ Installation steps:
 src\main\resources\db\createStoreManagementDatabase.sql
 5. Import src\main\resources\postman\Store_Management.postman_collection.json
 
+/api/order/delete and /api/product/delete endpoints are allowed only for SUPER_ADMIN roles. Add this roles in application.properties->spring.security.user.roles to send delete requests.  
+
 

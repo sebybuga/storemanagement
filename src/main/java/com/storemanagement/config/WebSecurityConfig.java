@@ -12,8 +12,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeRequests().anyRequest().fullyAuthenticated();
+        http.authorizeRequests()
+                .antMatchers("/api/**/delete/**").hasAnyRole("SUPER_ADMIN")
+                .anyRequest().fullyAuthenticated();
         http.httpBasic();
+
     }
 }
 

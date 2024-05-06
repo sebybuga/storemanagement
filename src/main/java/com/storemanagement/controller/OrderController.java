@@ -46,7 +46,7 @@ public class OrderController {
 		return orderService.getOrder(id);
 	}
 
-	@DeleteMapping("{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteOrder(@PathVariable Long id) {
 		orderService.deleteOrder(id);
 	}
