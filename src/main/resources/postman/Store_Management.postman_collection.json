@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "acce1100-3b57-467c-a1d1-35bdf65e761a",
+		"name": "Store Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9730507"
+	},
+	"item": [
+		{
+			"name": "GET Order ONE",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/api/order/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"order",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Product ONE",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/api/product/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Order MANY",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/api/order/all/1,2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"order",
+						"all",
+						"1,2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Product MANY",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/api/product/all/1,2,3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"product",
+						"all",
+						"1,2,3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Order ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"orderDate\": \"05/05/2024 12:00:00\",\r\n    \"createdBy\": \"test10\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\",        \r\n    \"orderProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 7.0\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 8.0\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Order ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"name\": \"Bere blonda Kozel Premium\",\r\n    \"supplier\": \"Ursus Breweries\",\r\n    \"description\": \"Sticla 15 x 0.66l\",\r\n    \"currencyId\": \"RON\",\r\n    \"price\": 150\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Order ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":24,\r\n    \"orderDate\": \"05/05/2024 12:00:00\",\r\n    \"createddBy\": \"test9\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\",        \r\n    \"updatedBy\": \"test9\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\",        \r\n    \"orderProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 20.0\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 21.0\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":18,\r\n    \"orderDate\": \"05/05/2024 12:00:00\",\r\n    \"createdBy\": \"test9\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\",        \r\n    \"orderProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 20.0\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 21.0\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/product/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"product",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE order ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/order/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"order",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"id\":3,\r\n    \"name\": \"Bere blonda Kozel Premium\",\r\n    \"supplier\": \"Ursus Breweries\",\r\n    \"description\": \"Sticla 15 x 0.66\",\r\n    \"currencyId\": \"RON\",\r\n    \"price\": 149\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "anxynms",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
