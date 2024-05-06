@@ -4,22 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderProductDTO {
+public class OrderProductDTO  {
 
-
-    //private Long id;
-
-
-    //private OrderDTO order;
-
-
-    //private ProductDTO product;
-
-    private Long productId;
-
+    private Long id;
+    private ProductDTO product;
     private Double quantity;
 
 

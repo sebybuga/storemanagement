@@ -3,18 +3,18 @@ package com.storemanagement.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+public class OrderProductRequestDTO {
 
-public class OrderPatchQuantityDTO {
+    @NonNull
+    private Long productId;
 
-	private Long id;
-
-	private Double quantity;
+    @NonNull
+    private Double quantity;
 
 
 }

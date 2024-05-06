@@ -1,6 +1,5 @@
 package com.storemanagement.entity;
 
-import com.storemanagement.constant.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,16 +19,20 @@ public class OrderProductEntity {
     private Long id;
 
     @ManyToOne
-    @MapsId("order_id")
-    @JoinColumn(referencedColumnName = "id")
+    //@MapsId("orderId")
+    @JoinColumn(name="orderId",referencedColumnName = "id")
     private OrderEntity order;
 
     @ManyToOne
-    @MapsId("product_id")
-    @JoinColumn(referencedColumnName = "id")
+    //@MapsId("productId")
+    @JoinColumn(name="productId",referencedColumnName = "id")
     private ProductEntity product;
 
+    @Column(name = "quantity")
     private Double quantity;
+
+    @Version
+    private Long version;
 
     @Override
     public boolean equals(Object o) {

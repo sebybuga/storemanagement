@@ -1,11 +1,12 @@
 package com.storemanagement.dto;
 
-import java.util.List;
-
 import com.storemanagement.constant.CurrencyEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 
 @Data
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 public class ProductDTO {
-	private Integer id;
+	private Long id;
 
 	private String name;
 

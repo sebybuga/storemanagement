@@ -33,25 +33,21 @@ public class ProductEntity implements Serializable {
 
     private Double price;
 
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<OrderProductEntity> orderProductList;
 
-    @ManyToMany
-    @JoinTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<OrderEntity> orders;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ProductEntity)) return false;
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(supplier, that.supplier) && Objects.equals(description, that.description) && currencyId == that.currencyId && Objects.equals(price, that.price) && Objects.equals(orders, that.orders);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(supplier, that.supplier) && Objects.equals(description, that.description) && currencyId == that.currencyId && Objects.equals(price, that.price) && Objects.equals(orderProductList, that.orderProductList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, supplier, description, currencyId, price, orders);
+        return Objects.hash(id, name, supplier, description, currencyId, price, orderProductList);
     }
 
     @Override

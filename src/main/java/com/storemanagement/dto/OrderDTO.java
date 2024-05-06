@@ -38,10 +38,7 @@ public class OrderDTO {
     @Enumerated(EnumType.ORDINAL)
     private OrderStatusEnum orderStatusId;
 
-
-    private List<ProductDTO> orderProductList;
-
-    private  List<OrderProductDTO> quantities;
+    private  List<OrderProductDTO> orderProductList;
 
 
 }

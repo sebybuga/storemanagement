@@ -1,18 +1,21 @@
 package com.storemanagement.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
+import com.storemanagement.constant.OrderStatusEnum;
 import com.storemanagement.dto.OrderDTO;
-import com.storemanagement.dto.OrderPatchStatusDTO;
-import com.storemanagement.dto.OrderProductDTO;
+import com.storemanagement.dto.OrderProductRequestDTO;
 import com.storemanagement.dto.OrderRequestDTO;
 import com.storemanagement.entity.OrderEntity;
 import com.storemanagement.entity.OrderProductEntity;
+import com.storemanagement.entity.ProductEntity;
+import com.storemanagement.repo.OrderProductRepository;
 import com.storemanagement.repo.OrderRepository;
+import com.storemanagement.repo.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,110 +23,134 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class OrderService {
-	//@Value("${usermanagement.user.getAllByIds}")
-	//private String usermanagementGetAllByIdsUrl;
-	private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-	//private final ObjectMapper mapper = new ObjectMapper();
-	private OrderRepository orderRepository;
-	//private UserService userService;
 
-	public OrderService(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
+    private static final Long VERSION_CHANGED = 1L;
+    private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
-	}
+    private OrderRepository orderRepository;
+    private ProductRepository productRepository;
+    private OrderProductRepository orderProductRepository;
 
-	public OrderDTO createOrder(OrderRequestDTO orderDTO) {
-		log.info("orderEntity to be created is :{}",orderDTO);
-		OrderEntity orderEntity = mapper.map(orderDTO, OrderEntity.class);
+    public OrderService(OrderRepository orderRepository, ProductRepository productRepository, OrderProductRepository orderProductRepository) {
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
+        this.orderProductRepository = orderProductRepository;
+    }
 
-		OrderEntity savedOrder = orderRepository.save(orderEntity);
+    public OrderDTO createOrder(OrderRequestDTO orderDTO) {
 
-		OrderDTO savedOrderDTO = mapper.map(savedOrder, OrderDTO.class);
+        return saveOrderInDatabase(orderDTO);
 
-		return savedOrderDTO;
+    }
 
-	}
+    @Transactional
+    private OrderDTO saveOrderInDatabase(OrderRequestDTO orderDTO) {
+        log.info("orderEntity to be saved is :{}", orderDTO);
+
+        OrderEntity orderEntity = null;
+        OrderDTO savedOrderDTO = null;
+
+        try {
+
+            Long orderId = orderDTO.getId();
+            if (orderId != null) {
+                Optional<OrderEntity> orderEntityOptional = orderRepository.findById(orderId);
+                if (orderEntityOptional.isEmpty()) {
+                    throw new Exception("Order id not found!");
+                }
+
+            }
+
+            orderEntity = mapper.map(orderDTO, OrderEntity.class);
+
+            List<OrderProductRequestDTO> orderProductRequestDTOList = orderDTO.getOrderProductList();
+
+            if (orderProductRequestDTOList != null && !orderProductRequestDTOList.isEmpty()) {
+                setOrderProductList(orderEntity, orderProductRequestDTOList);
+            }
+
+            OrderEntity savedOrder = orderRepository.save(orderEntity);
+
+            savedOrderDTO = mapper.map(savedOrder, OrderDTO.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return savedOrderDTO;
+    }
 
 
+    public OrderDTO getOrder(Long id) {
+        OrderDTO orderDTO = null;
+        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
 
-	public OrderDTO getOrder(Long id) {
+        if (orderEntity.isPresent()) {
+            orderDTO = mapper.map(orderEntity.get(), OrderDTO.class);
+        }
 
-		OrderDTO orderDTO=null;
+        return orderDTO;
 
-		Optional<OrderEntity> orderEntity = orderRepository.findById(id);
-
-		if (orderEntity.isPresent()) {
-			//log.debug("orderEntity is :{}",orderEntity.toString());
-
-			orderDTO = mapper.map(orderEntity.get(), OrderDTO.class);
-
-			setProductsQuantities(orderEntity.get(),orderDTO);
-		}
+    }
 
 
+    public OrderDTO updateOrder(OrderRequestDTO orderDto) {
+
+        return saveOrderInDatabase(orderDto);
+    }
+
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+
+    }
 
 
-		return orderDTO;
+    private void setOrderProductList(OrderEntity orderEntity, List<OrderProductRequestDTO> orderProductRequestDTOList) {
+        List<OrderProductEntity> orderProductEntityList = new ArrayList<>();
 
-	}
+        orderEntity.getOrderProductList().clear();
 
-	private void setProductsQuantities(OrderEntity orderEntity, OrderDTO orderDTO) {
-		 List<OrderProductEntity> orderProductEntityList =  orderEntity.getQuantities();
-		List<OrderProductDTO> orderProductDTOList = new ArrayList<>();
-		for (OrderProductEntity orderProductEntity :  orderProductEntityList){
-			OrderProductDTO orderProductDTO = new OrderProductDTO(
-					orderProductEntity.getProduct().getId(),
-					orderProductEntity.getQuantity());
-			orderProductDTOList.add(orderProductDTO);
+        Long orderId = orderEntity.getId();
+        if (orderId!=null) {
+            orderProductRepository.deleteByOrderId(orderId);
+        }
 
+        for (OrderProductRequestDTO orderProductRequestDTO : orderProductRequestDTOList) {
+            OrderProductEntity orderProductEntity = new OrderProductEntity();
+            buildOrderProductEntity(
+                    orderEntity,
+                    orderProductEntity,
+                    orderProductRequestDTO.getProductId(),
+                    orderProductRequestDTO.getQuantity()
 
-		}
-		orderDTO.setQuantities(orderProductDTOList);
+            );
+            orderProductEntityList.add(orderProductEntity);
 
-	}
+        }
+        orderEntity.setOrderProductList(orderProductEntityList);
 
-	public OrderDTO updateOrder(OrderDTO projectDto) {
-		OrderEntity savedOrderEntity = orderRepository.save(mapper.map(projectDto, OrderEntity.class));
-		OrderDTO savedOrderDTO = mapper.map(savedOrderEntity, OrderDTO.class);
+    }
 
-		//savedOrderDTO.setUserList(fetchUserList(savedOrderDTO.getUserList()));
+    private void buildOrderProductEntity(OrderEntity orderEntity, OrderProductEntity orderProductEntity, Long productId, Double quantity) {
+        if (orderEntity != null) {
+            orderEntity.setOrderProductList(null);
+            orderEntity.setOrderStatusId(OrderStatusEnum.INITIATED);
+            orderProductEntity.setOrder(orderEntity);
+        }
+        if (productId != null) {
+            Optional<ProductEntity> productEntity = productRepository.findById(productId);
+            if (productEntity.isPresent()) {
+                orderProductEntity.setProduct(productEntity.get());
+            }
+        }
+        if (quantity != null) {
+            orderProductEntity.setQuantity(quantity);
+        }
+        if (orderEntity.getId()!=null){
+            orderProductEntity.setVersion(VERSION_CHANGED);
+        }
 
-		return savedOrderDTO;
+    }
 
-	}
-
-	public void deleteOrder(Long id) {
-		orderRepository.deleteById(id);
-
-	}
-
-	public OrderDTO patchOrder(OrderPatchStatusDTO orderPatchStatusDTO) {
-		OrderEntity orderToSave=null;
-		Optional<OrderEntity> orderEntity = orderRepository.findById(orderPatchStatusDTO.getId());
-
-		if (orderEntity.isPresent() && orderPatchStatusDTO.getOrderStatusId()!=null){
-			orderToSave=orderEntity.get();
-			orderToSave.setOrderStatusId( orderPatchStatusDTO.getOrderStatusId());
-		}
-		OrderEntity patchOrder = orderRepository.save(orderToSave);
-
-		return mapper.map(patchOrder, OrderDTO.class);
-
-	}
-
-	/*public List<PriceDTO> fetchUserList(List<PriceDTO> userList) {
-
-		List<PriceDTO> fetchedUserList = new ArrayList<>();
-		if (CollectionUtils.isNotEmpty(userList)) {
-
-			List<Integer> userIdList = userList.stream().map(PriceDTO::getId)
-					.collect(Collectors.toList());
-
-			 fetchedUserList = userService.getByUserIdList(userIdList);
-
-		}
-		return fetchedUserList;
-
-	}*/
 
 }

@@ -44,7 +44,7 @@ public class OrderRequestDTO {
 
     @Valid
     @NotEmpty
-    private  List<OrderProductDTO> orderProductList;
+    private  List<OrderProductRequestDTO> orderProductList;
 
 
 }
