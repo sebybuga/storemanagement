@@ -32,7 +32,7 @@ public class ProductServiceTest {
     ProductRepository productRepositoryMock;
 
     private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-    
+
 
     @Test
     public void testCreateProduct() {
